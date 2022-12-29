@@ -1,0 +1,345 @@
+#include "../SCalc/calc.h"
+
+#test S21_CALC_000
+const char str_start[MAX_SIZE] = "5+x^2";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 0);
+ck_assert_double_eq(result, 149);
+
+#test S21_CALC_001
+const char str_start[MAX_SIZE] = "sin(cos(tan(x)))";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 0);
+
+#test S21_CALC_002
+const char str_start[MAX_SIZE] = "asin(acos(atan(x)))";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 0);
+
+#test S21_CALC_003
+const char str_start[MAX_SIZE] =
+    "xmodcos(x)+(+1)+(22mod11-(3+2)*5.5+(-1)modsin(30)-2.+.3)/2.modx";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 0);
+
+#test S21_CALC_004
+const char str_start[MAX_SIZE] =
+    "sin(asin(cos(acos(tan(atan(sqrt(ln(log(3)))))))))";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 0);
+
+#test S21_CALC_005
+const char str_start[MAX_SIZE] = "sin(x";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 38);
+
+#test S21_CALC_006
+const char str_start[MAX_SIZE] = "0.0045.";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 6);
+
+#test S21_CALC_007
+const char str_start[MAX_SIZE] = "ln(86)";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 0);
+
+#test S21_CALC_008
+const char str_start[MAX_SIZE] = "ln(33074)";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 0);
+
+#test S21_CALC_009
+const char str_start[MAX_SIZE] = "5++5";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 40);
+
+#test S21_CALC_010
+const char str_start[MAX_SIZE] = "5+()";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 41);
+
+#test S21_CALC_011
+const char str_start[MAX_SIZE] = "5+()";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 41);
+
+#test S21_CALC_012
+const char str_start[MAX_SIZE] = "5*^3";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 25);
+
+#test S21_CALC_013
+const char str_start[MAX_SIZE] = "(MOD9)";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 13);
+
+#test S21_CALC_014
+const char str_start[MAX_SIZE] = ".-1";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 3);
+
+#test S21_CALC_015
+const char str_start[MAX_SIZE] = "^3";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 29);
+
+#test S21_CALC_016
+const char str_start[MAX_SIZE] = "(^3";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 9);
+
+#test S21_CALC_017
+const char str_start[MAX_SIZE] = "(";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 14);
+
+#test S21_CALC_018
+const char str_start[MAX_SIZE] = ")";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 10);
+
+#test S21_CALC_019
+const char str_start[MAX_SIZE] = "sin(~)";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 9);
+
+#test S21_CALC_020
+const char str_start[MAX_SIZE] = "4(4+6)";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 33);
+
+#test S21_CALC_021
+const char str_start[MAX_SIZE] = "sin4+6";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 7);
+
+#test S21_CALC_022
+const char str_start[MAX_SIZE] = "4+5(4+6)";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 52);
+
+#test S21_CALC_023
+const char str_start[MAX_SIZE] = "+5+6";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 0);
+ck_assert_double_eq(result, 11);
+
+#test S21_CALC_024
+const char str_start[MAX_SIZE] = "-5+6";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 0);
+ck_assert_double_eq(result, 1);
+
+#test S21_CALC_025
+const char str_start[MAX_SIZE] = "10mod0";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 51);
+
+#test S21_CALC_026
+const char str_start[MAX_SIZE] = "10/0";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 50);
+
+#test S21_CALC_027
+const char str_start[MAX_SIZE] = "4+.-6";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 5);
+
+#test S21_CALC_028
+const char str_start[MAX_SIZE] = "4-.";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 4);
+
+#test S21_CALC_029
+const char str_start[MAX_SIZE] = "~";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 19);
+
+#test S21_CALC_030
+const char str_start[MAX_SIZE] = "4+mod";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 18);
+
+#test S21_CALC_031
+const char str_start[MAX_SIZE] = "4+5+";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 17);
+
+#test S21_CALC_032
+const char str_start[MAX_SIZE] = "(4+)5)";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 11);
+
+#test S21_CALC_033
+const char str_start[MAX_SIZE] = "((4+5)";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 15);
+
+#test S21_CALC_034
+const char str_start[MAX_SIZE] = "+)(4.5+5)";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 16);
+
+#test S21_CALC_035
+const char str_start[MAX_SIZE] = "4-mod";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 20);
+
+#test S21_CALC_036
+const char str_start[MAX_SIZE] = "4-5/";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 27);
+
+#test S21_CALC_037
+const char str_start[MAX_SIZE] = "mod~";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 42);
+
+#test S21_CALC_038
+const char str_start[MAX_SIZE] = "4+5mod";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 43);
+
+#test S21_CALC_039
+const char str_start[MAX_SIZE] = "5/0";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 50);
+
+#test S21_CALC_040
+const char str_start[MAX_SIZE] = "5+x~4-5";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 39);
+
+#test S21_CALC_041
+const char str_start[MAX_SIZE] = "4-52-7^";
+int err = OK;
+double result = 0;
+double x = 12;
+err = calc(str_start, x, &result);
+ck_assert_int_eq(err, 30);
+
+#main-pre
+srunner_set_fork_status(sr, CK_NOFORK);

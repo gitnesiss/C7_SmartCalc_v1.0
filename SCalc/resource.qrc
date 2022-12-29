@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/rec">
+        <file>img/exit.png</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>img/info.png</file>
+    </qresource>
+    <qresource prefix="/rectr"/>
+</RCC>
